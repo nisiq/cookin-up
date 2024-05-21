@@ -1,14 +1,21 @@
 <script lang="ts">
 import SelecionarIngredientes from './SelecionarIngredientes.vue';
+import Tag from './Tag.vue';
 
 
 export default {
-    data(){
+    data() {
         return {
-            ingredientes: ['Alho', 'Manteiga', 'Orégano']
+            ingredientes: [] as string[]
         };
     },
-    components: {SelecionarIngredientes}
+    components: { SelecionarIngredientes, Tag },
+    methods: {
+        adicionarIngrediente(ingrediente: string) {
+            this.ingredientes.push(ingrediente)
+
+        }
+    }
 }
 </script>
 
@@ -19,15 +26,14 @@ export default {
                 Sua lista:
             </span>
 
-<!-- v-if v-else -->
+            <!-- v-if v-else -->
             <ul v-if="ingredientes.length" class="ingredientes-sua-lista">
-                
-<!-- v-bind :key permite add chave em html -->
-<!-- diretiva v-for -->
-                <li v-for="ingrediente in ingredientes" 
-                :key="ingrediente"
-                class="ingrediente">
-                    {{ ingrediente }}
+
+                <!-- v-bind :key permite add chave em html -->
+                <!-- diretiva v-for -->
+                <li v-for="ingrediente in ingredientes" :key="ingrediente">
+                    <Tag :texto="ingrediente" :ativa="true" />
+
                 </li>
             </ul>
 
@@ -38,14 +44,15 @@ export default {
 
         </section>
 
-        <SelecionarIngredientes/>
-        
-    </main>
+        <!-- add item na lista -->
+        <SelecionarIngredientes 
+            @adicionar-ingrediente="adicionarIngrediente"
+        />
 
+    </main>
 </template>
 
 <style scoped>
-
 .conteudo-principal {
     padding: 6.5rem 7.5rem;
     border-radius: 3.75rem 3.75rem 0rem 0rem;
@@ -72,18 +79,6 @@ export default {
     flex-wrap: wrap;
 }
 
-.ingrediente {
-    display: inline-block;
-    border-radius: 0.5rem;
-    min-width: 4.25rem;
-    padding: 0.5rem;
-    text-align: center;
-        transition: 0.2s;
-        color: var(--creme, #FFFAF3);
-    background: var(--coral, #F0633C);
-    font-weight: 700;
-}
-
 lista-vazia {
     display: flex;
     justify-content: center;
@@ -96,17 +91,16 @@ lista-vazia {
 }
 
 @media only screen and (max-width: 1300px) {
-  .conteudo-principal {
-    padding: 5rem 3.75rem;
-    gap: 3.5rem;
-  }
+    .conteudo-principal {
+        padding: 5rem 3.75rem;
+        gap: 3.5rem;
+    }
 }
 
 @media only screen and (max-width: 767px) {
-  .conteudo-principal {
-    padding: 4rem 1.5rem;
-    gap: 4rem;
-  }
+    .conteudo-principal {
+        padding: 4rem 1.5rem;
+        gap: 4rem;
+    }
 }
-
 </style>
