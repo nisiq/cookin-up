@@ -4,8 +4,11 @@ import { obterCategorias } from '@/http/index';
 export default {
     data() {
         return {
-            categorias: obterCategorias()
+            categorias: []
         }
+    },
+    async created() {
+      this.categorias = await obterCategorias();  
     }
 }
 
