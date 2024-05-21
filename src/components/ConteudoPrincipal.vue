@@ -1,19 +1,28 @@
 <script lang="ts">
 import SelecionarIngredientes from './SelecionarIngredientes.vue';
 import Tag from './Tag.vue';
+import SuaLista from './SuaLista.vue';
+import MostrarReceitas from './MostrarReceitas.vue';
 
+type Pagina = 'SelecionarIngredientes' | 'MostrarReceitas'
 
 export default {
     data() {
         return {
-            ingredientes: [] as string[]
+            ingredientes: [] as string[],
+            conteudo: 'SelecionarIngredientes' as Pagina
         };
     },
-    components: { SelecionarIngredientes, Tag },
+    components: { SelecionarIngredientes, Tag, SuaLista, MostrarReceitas },
     methods: {
         adicionarIngrediente(ingrediente: string) {
             this.ingredientes.push(ingrediente)
-
+        },
+        removerIngrediente(ingrediente: string) {
+            this.ingredientes = this.ingredientes.filter(iLista => ingrediente !== iLista);
+        },
+        navegar(pagina: Pagina) {
+            this.conteudo = pagina
         }
     }
 }
@@ -21,33 +30,19 @@ export default {
 
 <template>
     <main class="conteudo-principal">
-        <section>
-            <span class="subtitulo-lg sua-lista-texto">
-                Sua lista:
-            </span>
+        <SuaLista :ingredientes="ingredientes" />
 
-            <!-- v-if v-else -->
-            <ul v-if="ingredientes.length" class="ingredientes-sua-lista">
+        <!-- KeepAlive preserva os itens, e funciona bem com v if / v else -->
+        <!-- add ou remover item na lista -->
+        <KeepAlive include="SelecionarIngredientes">
+            <SelecionarIngredientes v-if="conteudo === 'SelecionarIngredientes'"
+                @adicionar-ingrediente="adicionarIngrediente" @remover-ingrediente="removerIngrediente"
+                @buscar-receitas="navegar('MostrarReceitas')" />
 
-                <!-- v-bind :key permite add chave em html -->
-                <!-- diretiva v-for -->
-                <li v-for="ingrediente in ingredientes" :key="ingrediente">
-                    <Tag :texto="ingrediente" :ativa="true" />
-
-                </li>
-            </ul>
-
-            <p v-else class="paragrafo lista-vazia">
-                <img src="../assets//images//icones/lista-vazia.svg" alt="ícone de pesquisa">
-                Sua lista está vazia, selecione ingredientes para iniciar.
-            </p>
-
-        </section>
-
-        <!-- add item na lista -->
-        <SelecionarIngredientes 
-            @adicionar-ingrediente="adicionarIngrediente"
-        />
+            <MostrarReceitas v-else-if="conteudo === 'MostrarReceitas'"
+            :ingredientes="ingredientes"
+                @editar-receitas="navegar('SelecionarIngredientes')" />
+        </KeepAlive>
 
     </main>
 </template>

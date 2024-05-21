@@ -24,19 +24,15 @@ export default {
 
         <ul class="categoria__ingredientes">
             <li v-for="ingrediente in categoria.ingredientes" :key="ingrediente">
-                <IngredienteSelecionavel 
-                :ingrediente="ingrediente"
-                @adicionar-ingrediente="$emit('adicionarIngrediente', $event)"
-                />
+                <IngredienteSelecionavel :ingrediente="ingrediente"
+                    @adicionar-ingrediente="$emit('adicionarIngrediente', $event)" />
             </li>
         </ul>
 
     </article>
-
 </template>
 
 <style scoped>
-
 .categoria {
     width: 19.5rem;
     padding: 1rem;
@@ -74,5 +70,4 @@ export default {
     gap: 0.5rem;
     flex-wrap: wrap;
 }
-
 </style>

@@ -17,22 +17,20 @@ export default {
 
             if (this.selecionado) {
                 this.$emit('adicionarIngrediente', this.ingrediente)
+            } else {
+                (!this.selecionado)
+                this.$emit('removerIngrediente', this.ingrediente)
             }
-
         }
     },
-    emits: ['adicionarIngrediente']
+    emits: ['adicionarIngrediente', 'removerIngrediente']
 }
 </script>
 
 <template>
     <!-- select itens -->
     <!-- v-on:click = @click -->
-    <button
-        class="ingrediente"
-        @click="aoClicar"
-        :aria-pressed="selecionado"
-    >
+    <button class="ingrediente" @click="aoClicar" :aria-pressed="selecionado">
         <Tag :texto="ingrediente" :ativa="selecionado" />
     </button>
 </template>
@@ -41,5 +39,4 @@ export default {
 .ingrediente {
     cursor: pointer;
 }
-
 </style>
