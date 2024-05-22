@@ -36,7 +36,8 @@ export default {
         <!-- add ou remover item na lista -->
         <KeepAlive include="SelecionarIngredientes">
             <SelecionarIngredientes v-if="conteudo === 'SelecionarIngredientes'"
-                @adicionar-ingrediente="adicionarIngrediente" @remover-ingrediente="removerIngrediente"
+                @adicionar-ingrediente="adicionarIngrediente" 
+                @remover-ingrediente="removerIngrediente"
                 @buscar-receitas="navegar('MostrarReceitas')" />
 
             <MostrarReceitas v-else-if="conteudo === 'MostrarReceitas'"

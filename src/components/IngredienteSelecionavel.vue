@@ -18,7 +18,6 @@ export default {
             if (this.selecionado) {
                 this.$emit('adicionarIngrediente', this.ingrediente)
             } else {
-                (!this.selecionado)
                 this.$emit('removerIngrediente', this.ingrediente)
             }
         }
