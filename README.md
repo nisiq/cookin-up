@@ -1,6 +1,10 @@
-# cookin-up
+# Cookin' Up!
 
-This template should help get you started developing with Vue 3 in Vite.
+Project made to learn the basics of Vue.
+
+![alt text](image.png)
+
+In Cookin' Up, you select ingredients to build your ingredient list. You can then search for recipes that can be made with the ingredients on your list!
 
 ## Recommended IDE Setup
 
@@ -9,10 +13,6 @@ This template should help get you started developing with Vue 3 in Vite.
 ## Type Support for `.vue` Imports in TS
 
 TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 
@@ -24,10 +24,4 @@ npm install
 
 ```sh
 npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
 ```
